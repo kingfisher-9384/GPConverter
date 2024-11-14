@@ -22,3 +22,4 @@ C:\Users\oskar\RiderProjects\GPConverter\GPConverter\obj\Debug\net8.0-windows\re
 C:\Users\oskar\RiderProjects\GPConverter\GPConverter\obj\Debug\net8.0-windows\GPConverter.pdb
 C:\Users\oskar\RiderProjects\GPConverter\GPConverter\obj\Debug\net8.0-windows\GPConverter.genruntimeconfig.cache
 C:\Users\oskar\RiderProjects\GPConverter\GPConverter\obj\Debug\net8.0-windows\ref\GPConverter.dll
+C:\Users\oskar\RiderProjects\GPConverter\GPConverter\obj\Debug\net8.0-windows\GPConverter.sourcelink.json

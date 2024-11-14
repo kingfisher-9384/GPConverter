@@ -1,10 +1,23 @@
-﻿using GPConverter.Models.Enums;
+﻿using GPConverter.Models;
+using GPConverter.Models.Enums;
+using GPConverter.Utilities;
 
 namespace GPConverter;
 
 public class Application
 {
     public async Task Main(string[] args)
+    {
+        var parameters = ParseUserInput(args); 
+        // TODO: implement logic here'
+        foreach (var path in parameters.InputFilePaths)
+        {
+            Console.WriteLine(path);
+        }
+        AnyKeyPrompt();
+    }
+
+    private ConversionParameters? ParseUserInput(string[] args)
     {
         var inputType = "";
         
@@ -21,9 +34,8 @@ public class Application
         if (!Enum.TryParse(inputType, out FileType inputFileType))
         {
             Console.WriteLine("Invalid input-file type!");
-            return;
+            return null;
         }
-        
         
         var outputType = "";
         
@@ -40,36 +52,63 @@ public class Application
         if (!Enum.TryParse(outputType, out FileType outputFileType))
         {
             Console.WriteLine("Invalid output-file type!");
-            return;
+            return null;
         }
 
-        var folderPath = "";
+        if (outputFileType.GetConversionType() != inputFileType.GetConversionType())
+        {
+            Console.WriteLine("Cannot convert different format categories!");
+            return null;
+        }
+        
+        if (outputFileType.Equals(inputFileType))
+        {
+            Console.WriteLine("Cannot convert identical file types!");
+            
+            return null;
+        }
+
+        var fileNames = new List<string>();
 
         if (args.Length == 3)
         {
-            folderPath = args[2];
+            fileNames = [args[2]];  // TODO kunnon käsittely tälle tää on ihan kauhee paskakasa
         }
 
         else
         {
-            var dialogResult = BrowseFolders();
-            if (dialogResult == "Cancelled")
+            var dialogResult = BrowseFiles(inputFileType);
+            if (dialogResult[0] == "Cancelled")
             {
-                Console.WriteLine("Folder selection interrupted!");
-                return;
+                Console.WriteLine("File selection interrupted!");
+                return null;
             }
-            folderPath = dialogResult;
+            fileNames = dialogResult.ToList();
         }
-        
-        // TODO: implement logic here
-        Console.Write("Press any key to continue...");
-        Console.ReadKey();
+
+        return new ConversionParameters
+        {
+            ConversionType = inputFileType.GetConversionType(),
+            InputFileType = inputFileType,
+            OutputFileType = outputFileType,
+            InputFilePaths = fileNames
+        };
     }
     
-    private string BrowseFolders()
+    private string[] BrowseFiles(FileType type)
     {
-        var dialog = new FolderBrowserDialog();
+        var dialog = new OpenFileDialog();
+
+        dialog.Multiselect = true;
+        dialog.Filter = "Selected type|*." + type.ToString().ToLower();
+        
         var result = dialog.ShowDialog();
-        return DialogResult.OK == result ? dialog.SelectedPath : "Cancelled";
+        return DialogResult.OK == result ? dialog.FileNames : ["Cancelled"];
+    }
+    
+    private void AnyKeyPrompt()
+    {
+        Console.Write("Press any key to continue...");
+        Console.ReadKey();
     }
 }
