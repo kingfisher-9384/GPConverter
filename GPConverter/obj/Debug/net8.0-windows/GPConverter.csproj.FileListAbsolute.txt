@@ -23,3 +23,11 @@ C:\Users\oskar\RiderProjects\GPConverter\GPConverter\obj\Debug\net8.0-windows\GP
 C:\Users\oskar\RiderProjects\GPConverter\GPConverter\obj\Debug\net8.0-windows\GPConverter.genruntimeconfig.cache
 C:\Users\oskar\RiderProjects\GPConverter\GPConverter\obj\Debug\net8.0-windows\ref\GPConverter.dll
 C:\Users\oskar\RiderProjects\GPConverter\GPConverter\obj\Debug\net8.0-windows\GPConverter.sourcelink.json
+C:\Users\oskar\RiderProjects\GPConverter\GPConverter\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.dll
+C:\Users\oskar\RiderProjects\GPConverter\GPConverter\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\oskar\RiderProjects\GPConverter\GPConverter\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\Users\oskar\RiderProjects\GPConverter\GPConverter\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.Json.dll
+C:\Users\oskar\RiderProjects\GPConverter\GPConverter\bin\Debug\net8.0-windows\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\oskar\RiderProjects\GPConverter\GPConverter\bin\Debug\net8.0-windows\Microsoft.Extensions.FileProviders.Physical.dll
+C:\Users\oskar\RiderProjects\GPConverter\GPConverter\bin\Debug\net8.0-windows\Microsoft.Extensions.FileSystemGlobbing.dll
+C:\Users\oskar\RiderProjects\GPConverter\GPConverter\bin\Debug\net8.0-windows\appsettings.json

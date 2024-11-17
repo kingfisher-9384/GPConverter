@@ -1,4 +1,6 @@
-﻿using GPConverter.Models.Enums;
+﻿using System.Drawing.Imaging;
+using System.Reflection;
+using GPConverter.Models.Enums;
 
 namespace GPConverter.Utilities;
 
@@ -19,6 +21,20 @@ public static class HelperFunctions
         }
 
         return ConversionType.Image;
-        
+    }
+
+    public static ImageFormat ParseImageFormat(this string input)
+    {
+        try
+        {
+            return (ImageFormat)typeof(ImageFormat)
+                .GetProperty(input, BindingFlags.Public | BindingFlags.Static | BindingFlags.IgnoreCase)
+                ?.GetValue(input, null)!;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return ImageFormat.Png;
+        }
     }
 }

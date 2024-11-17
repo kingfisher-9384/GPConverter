@@ -1,19 +1,16 @@
-﻿using GPConverter.Models;
+﻿using GPConverter.Interfaces;
+using GPConverter.Models;
 using GPConverter.Models.Enums;
 using GPConverter.Utilities;
 
 namespace GPConverter;
 
-public class Application
+public class Application(IConversionManager _conversionManager)
 {
     public async Task Main(string[] args)
     {
-        var parameters = ParseUserInput(args); 
-        // TODO: implement logic here'
-        foreach (var path in parameters.InputFilePaths)
-        {
-            Console.WriteLine(path);
-        }
+        var parameters = ParseUserInput(args);
+        if (parameters != null) _conversionManager.Convert(parameters);
         AnyKeyPrompt();
     }
 

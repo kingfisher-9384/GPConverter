@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using GPConverter.Interfaces;
+using GPConverter.Services;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace GPConverter;
@@ -16,12 +19,19 @@ class Program
 
     private static ServiceProvider CreateServices()
     {
+        var configuration = new ConfigurationBuilder()
+            .AddJsonFile($"appsettings.json");
+        var config = configuration.Build();
+        
         var serviceProvider = new ServiceCollection()
+            .AddSingleton<IConfiguration>(config)
+            .AddScoped<IConversionManager, ConversionManager>()
+            .AddScoped<IImageFileConversions, ImageFileConversions>()
             .AddLogging(options =>
             {
                 options.ClearProviders();
             })
-            .AddSingleton<Application>(new Application())
+            .AddSingleton<Application>()
             .BuildServiceProvider();
         
         return serviceProvider;
