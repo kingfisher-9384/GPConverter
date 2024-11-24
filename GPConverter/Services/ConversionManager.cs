@@ -18,14 +18,16 @@ public class ConversionManager(IImageFileConversions imageFileConversions, IConf
             switch (parameters.ConversionType)
             {
                 case ConversionType.Image:
-                    var img = Image.FromFile(filePath);
-                    
-                    var outputFilePath = configuration["Converter:Path:ImageOutput"];
+                    using (var img = Image.FromFile(filePath))
+                    {
+                        var outputFilePath = configuration["Converter:Path:ImageOutput"];
 
-                    imageFileConversions.SaveToPathWithFormat(img,
-                        outputFilePath + fileName + "." + parameters.OutputFileType);
-                        
-                    return true;
+                        imageFileConversions.SaveToPathWithFormat(img,
+                            outputFilePath + fileName + "." + parameters.OutputFileType.ToString().ToLower());
+
+                        return true;
+                    }
+                    
                 case ConversionType.Video:
                     break;
                 case ConversionType.Audio:

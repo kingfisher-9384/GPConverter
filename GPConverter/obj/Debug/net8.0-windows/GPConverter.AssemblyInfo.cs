@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GPConverter")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+74176259776914ec9928fb95e9a51fd1ff20bde2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4d0252e179101ec26248cb14eb298f7467ae41ec")]
 [assembly: System.Reflection.AssemblyProductAttribute("GPConverter")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GPConverter")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

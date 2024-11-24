@@ -27,14 +27,21 @@ public static class HelperFunctions
     {
         try
         {
-            return (ImageFormat)typeof(ImageFormat)
-                .GetProperty(input, BindingFlags.Public | BindingFlags.Static | BindingFlags.IgnoreCase)
-                ?.GetValue(input, null)!;
+            input = input.Replace(".", "");
+            
+            var converter = new ImageFormatConverter();
+            
+            return (ImageFormat)converter.ConvertFromString(input)! ?? throw new InvalidOperationException();
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             return ImageFormat.Png;
         }
+    }
+
+    public static void EnsurePathExists(this string path)
+    {
+        Directory.CreateDirectory(Path.GetDirectoryName(path) ?? throw new InvalidOperationException());
     }
 }

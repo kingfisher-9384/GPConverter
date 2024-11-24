@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "yh6FwCgAopQ=",
+  "dgSpecHash": "/7PVMbJyHns=",
   "success": true,
   "projectFilePath": "C:\\Users\\oskar\\RiderProjects\\GPConverter\\GPConverter\\GPConverter.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\oskar\\.nuget\\packages\\magick.net-q16-anycpu\\14.2.0\\magick.net-q16-anycpu.14.2.0.nupkg.sha512",
+    "C:\\Users\\oskar\\.nuget\\packages\\magick.net.core\\14.2.0\\magick.net.core.14.2.0.nupkg.sha512",
     "C:\\Users\\oskar\\.nuget\\packages\\microsoft.extensions.configuration\\8.0.0\\microsoft.extensions.configuration.8.0.0.nupkg.sha512",
     "C:\\Users\\oskar\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\oskar\\.nuget\\packages\\microsoft.extensions.configuration.fileextensions\\8.0.0\\microsoft.extensions.configuration.fileextensions.8.0.0.nupkg.sha512",
