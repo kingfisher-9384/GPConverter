@@ -1,6 +1,8 @@
-﻿using System.Drawing.Imaging;
+﻿using System.Diagnostics;
+using System.Drawing.Imaging;
 using System.Reflection;
 using GPConverter.Models.Enums;
+using ImageMagick;
 
 namespace GPConverter.Utilities;
 
@@ -37,6 +39,21 @@ public static class HelperFunctions
         {
             Console.WriteLine(e);
             return ImageFormat.Png;
+        }
+    }
+    
+    public static MagickFormat ParseMagickFormat(this string input)
+    {
+        try
+        {
+            input = input.Replace(".", "");
+            
+            return (MagickFormat)Enum.Parse(typeof(MagickFormat), input, true)!;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return MagickFormat.Png;
         }
     }
 

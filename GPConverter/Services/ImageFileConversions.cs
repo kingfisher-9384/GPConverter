@@ -1,6 +1,7 @@
 ﻿using System.Drawing.Imaging;
 using GPConverter.Interfaces;
 using GPConverter.Utilities;
+using ImageMagick;
 
 namespace GPConverter.Services;
 
@@ -22,28 +23,24 @@ public class ImageFileConversions : IImageFileConversions
         return stream.ToArray();
     }
     
-    public void SaveToPathWithFormat(Image img, string path)
+    public void SaveToPathWithFormat(MagickImage img, string path)
     {
         var extension = Path.GetExtension(path);
         
         path.EnsurePathExists();
+        
+        img.Format = extension.ParseMagickFormat();
 
         if (extension is ".jpg" or ".jpeg" or ".jif" or ".jfif" or ".jpe" or ".jfi")
         {
-            SaveToPathJpeg(img, path);
-            return;
+            if (img.Format == MagickFormat.Png)
+            {
+                img.Format = MagickFormat.Jpeg;
+            }
+
+            img.Quality = 100;
         }
         
-        img.Save(path, extension.ParseImageFormat());
-    }
-
-    private void SaveToPathJpeg(Image img, string path)
-    {
-        using var encoderParameters = new EncoderParameters(1);
-        using var encoderParameter = new EncoderParameter(Encoder.Quality, 100L);
-        
-        var codecInfo = ImageCodecInfo.GetImageEncoders().First(codec => codec.FormatID == ImageFormat.Jpeg.Guid);
-        encoderParameters.Param[0] = encoderParameter;
-        img.Save(path, codecInfo, encoderParameters);
+        img.Write(path);
     }
 }
