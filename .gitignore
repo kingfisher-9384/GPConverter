@@ -31,6 +31,7 @@ bld/
 #wwwroot/
 
 **/obj/
+*/appsettings.json
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
@@ -304,3 +305,7 @@ __pycache__/
 # OpenCover UI analysis results
 OpenCover/
 Test1/obj
+
+# GPConverter
+GPConverter/bin/**
+GPConverter/obj/**

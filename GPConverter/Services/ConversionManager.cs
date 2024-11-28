@@ -8,8 +8,10 @@ namespace GPConverter.Services;
 
 public class ConversionManager(IImageFileConversions imageFileConversions, IConfiguration configuration) : IConversionManager
 {
-    public bool Convert(ConversionParameters parameters)
+    public string? Convert(ConversionParameters parameters)
     {
+        string? outputPath = null;
+        
         foreach (var filePath in parameters.InputFilePaths)
         {
             var inputFilePath = new FileInfo(filePath);
@@ -21,22 +23,54 @@ public class ConversionManager(IImageFileConversions imageFileConversions, IConf
                 case ConversionType.Image:
                     using (var img = new MagickImage(filePath))
                     {
-                        var outputFilePath = configuration["Converter:Path:ImageOutput"];
+                        var outputImagePath = configuration["Converter:Path:ImageOutput"];
+                        outputPath = outputImagePath;
 
-                        imageFileConversions.SaveToPathWithFormat(img,
-                            outputFilePath + fileName + "." + parameters.OutputFileType.ToString().ToLower());
+                        imageFileConversions.SaveToPathWithFormat(img, GetAvailablePath(
+                            outputImagePath + fileName + "." + parameters.OutputFileType.ToString().ToLower()));
                         continue;
-                    } // TODO overwrite file
+                    } 
                     
                 case ConversionType.Video:
+                    // TODO implement support for video
+                    
+                    var outputVideoPath = configuration["Converter:Path:ImageOutput"];
+                    outputPath = outputVideoPath;
                     break;
+                
                 case ConversionType.Audio:
+                    // TODO implement support for audio
+                    
+                    var outputAudioPath = configuration["Converter:Path:ImageOutput"];
+                    outputPath = outputAudioPath;
                     break;
+                
                 default:
                     throw new ArgumentOutOfRangeException(paramName: nameof(parameters.ConversionType), message: "Invalid conversion type");
             }
         }
+        return outputPath;
+    }
 
-        return true;
+    private static string GetAvailablePath(string path)
+    {
+        if (!File.Exists(path))
+        {
+            return path;
+        }
+        
+        var extension = Path.GetExtension(path);
+        path = path.Replace(extension, "");
+        
+        for (var i = 1; i < 100; i++)
+        {
+            var newPath = path + " (" + i + ")" + extension;
+            if (!File.Exists(newPath))
+            {
+                return newPath;
+            }
+        }
+
+        return "Error!"; 
     }
 }

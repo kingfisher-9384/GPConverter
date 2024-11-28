@@ -5,17 +5,38 @@ using GPConverter.Utilities;
 
 namespace GPConverter;
 
-public class Application(IConversionManager _conversionManager)
+public class Application(IConversionManager conversionManager)
 {
     public async Task Main(string[] args)
     {
-        var parameters = ParseUserInput(args);
-        if (parameters != null) _conversionManager.Convert(parameters);
-        AnyKeyPrompt();
+        try
+        {
+            var output = "Error";
+            
+            var parameters = ParseUserInput(args);
+            if (parameters != null) output = conversionManager.Convert(parameters);
+
+            Console.WriteLine("Files successfully converted to output folder: " + output);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
+        if (args.Length < 1)
+        {
+            AnyKeyPrompt();
+        }
     }
 
     private ConversionParameters? ParseUserInput(string[] args)
     {
+        if (args.Length > 0 && args[0].ToLower() is "help")
+        {
+            PrintHelp();
+            return null;
+        }
+        
         var inputType = "";
         
         if (args.Length < 2)
@@ -65,11 +86,11 @@ public class Application(IConversionManager _conversionManager)
             return null;
         }
 
-        var fileNames = new List<string>();
+        List<string> fileNames;
 
         if (args.Length == 3)
         {
-            fileNames = [args[2]];  // TODO kunnon käsittely tälle tää on ihan kauhee paskakasa
+            fileNames = args[2].Split(';').ToList();
         }
 
         else
@@ -107,5 +128,15 @@ public class Application(IConversionManager _conversionManager)
     {
         Console.Write("Press any key to continue...");
         Console.ReadKey();
+    }
+
+    private void PrintHelp()
+    {
+        Console.WriteLine("Usage: GPConverter <input-file-type> <output-file-type> [<input-file-paths>]");
+        Console.WriteLine();
+        Console.WriteLine("Input-file-type: Original file extension without the period (.).");
+        Console.WriteLine("Output-file-type: Output file extension without the period (.).");
+        Console.WriteLine("Input-file-paths: Original file paths as a single string, where paths are seperated by a semicolon (;).");
+        Console.WriteLine();
     }
 }

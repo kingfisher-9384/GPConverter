@@ -1,5 +1,0 @@
-C:\Users\oskar\RiderProjects\GPConverter\GPConverter\obj\Debug\net8.0\GPConverter.csproj.AssemblyReference.cache
-C:\Users\oskar\RiderProjects\GPConverter\GPConverter\obj\Debug\net8.0\GPConverter.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\oskar\RiderProjects\GPConverter\GPConverter\obj\Debug\net8.0\GPConverter.AssemblyInfoInputs.cache
-C:\Users\oskar\RiderProjects\GPConverter\GPConverter\obj\Debug\net8.0\GPConverter.AssemblyInfo.cs
-C:\Users\oskar\RiderProjects\GPConverter\GPConverter\obj\Debug\net8.0\GPConverter.csproj.CoreCompileInputs.cache

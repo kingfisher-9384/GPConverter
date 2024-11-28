@@ -4,5 +4,5 @@ namespace GPConverter.Interfaces;
 
 public interface IConversionManager
 {
-    bool Convert(ConversionParameters parameters);
+    string? Convert(ConversionParameters parameters);
 }
