@@ -1,4 +1,4 @@
-### What it is
+### What is it?
 GPConverter is a general-purpose file converter that can be used to convert audio, video or image file formats. For example, converting a .heic image file into .png. 
 The program currently only supports image file conversions.
 
